@@ -1,0 +1,45 @@
+---
+title: "Developing Data Products Wk.2 Assignment"
+author: "JJD"
+date: "2/1/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Top 10 Chicago Pizza Locations
+(as Per Eater Chicago and HIGHLY contestable)
+
+```{r, echo=FALSE}
+library(leaflet)
+
+PizzaIcon <- makeIcon(
+  iconUrl = "https://img.lovepik.com/free_png/32/42/82/20v58PICD9d7z4V41T3Ui_PIC2018.png_860.png",
+  iconWidth = 31*215/230, iconHeight = 31,
+  iconAnchorX = 31*215/230/2, iconAnchorY = 16
+)
+
+PizzaLatLong <- data.frame(
+  lat = c(41.91415240441151, 42.00237321984923, 41.99532329483542, 41.97593995039852, 41.96337110890932, 41.931004995514925, 41.92600312629388, 41.92213668814821, 41.91855016164727, 41.917962796526105),
+  lng = c(-87.70971483598655, -87.72554489325226, -87.6698863838462, -87.69215417975683, -87.67365793373861, -87.65581288016027, -87.70186308016042, -87.66436316441742, -87.6779905936561, -87.69883972249096))
+
+PizzaSites <- c(
+  "<a href='http://www.millyspizzachi.com/'>Milly's Pizza in the Pan</a>",
+  "<a href='https://www.loumalnatis.com/lous-lincolnwood'>Lou Malnati's</a>",
+  "<a href='http://www.georgesdeepdish.com/'>George's Pizza</a>",
+  "<a href='http://jimmyspizzacafe.weborder.net/'>Jimmy's Pizza Cafe</a>",
+  "<a href='http://www.spaccanapolipizzeria.com/'>Spacca Nappoli</a>",
+  "<a href='https://pats-pizzeria-chicago.securebrygid.com/zgrid/themes/13142/mobile/intro/index.jsp'>Pat's Pizza</a>",
+  "<a href='http://pauliegee.com/'>Pauli Gee's</a>",
+  "<a href='http://pequodspizza.com/chicago/?utm_source=google_my_business&utm_medium=organic'>Pequod's</a>",
+  "<a href='https://www.mypiepizza.com/menu?y_source=1_MTQ3OTc5OTMtNzE1LWxvY2F0aW9uLm1lbnVfdXJs'>My Pi Pizza</a>",
+  "<a href='http://www.middlebrowbeer.com/'>Bungalow by Middle Brow</a>"
+)
+
+PizzaLatLong %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(icon = PizzaIcon, popup = PizzaSites)
+```
